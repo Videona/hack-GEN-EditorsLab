@@ -1,0 +1,317 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Test HAckathon</title>
+
+    <link rel="shortcut icon" href="images/favicon.png">
+  
+    <!-- Twitter -->
+    <script src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- wNumb -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js"></script>
+
+    <!-- noUiSlider CSS -->
+    <link rel="stylesheet" href="http://materializecss.com/extras/noUiSlider/nouislider.css">
+
+    <!-- noUiSlider -->
+    <script src="http://materializecss.com/extras/noUiSlider/nouislider.js"></script>
+
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+    <!-- Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    
+          
+    <style type="text/css">
+    .inline-block { display: inline-block; }
+    
+    .wrapper {
+      text-align: center;
+    }
+
+    .search-box {
+      display: inline-block;
+      margin: 32px 0;
+      max-width: 600px;
+      width: 100%
+    }
+      .search-box .row,
+      .search-box .chips {
+        margin-bottom: 0;
+      }
+
+      .search-box .btn-flat {
+          padding: 6px;
+      }
+
+    .content,
+    .search-box {
+      display: inline-block;
+      text-align: left;
+      max-width: 600px;
+      width: 100%
+    }
+
+    .list-elem {
+      display: table;
+      margin: 8px 0;
+    }
+
+    .tweet, 
+    .scoring { 
+      display: table-cell; 
+      vertical-align: middle; 
+    }
+
+    .tweet iframe {
+      margin: 0 !important;
+    }
+    
+    .scoring {
+      background-color: lightgrey;
+      height: 498px;
+      text-align: center;
+      width: 100px;
+    }
+    .scoring.verified {
+      background-color: lightgreen;
+      color: green;
+    }
+    .scoring.false {
+      background-color: indianred;
+      color: white;
+    }
+
+    .filters {
+      padding: 16px;
+    }
+      .filters .switch {
+        margin: 8px 0;
+        text-align: center;
+      }
+      .filters .switch i {
+        color: #333;
+        padding: 8px;
+        text-align: center;
+        display: inline-block;
+        /*width: 24px;*/
+      }
+
+      .filters h5 {
+        margin: 24px 16px 0;
+      }
+
+    .hidden { display: none; }
+    .padding { padding: 16px; }
+    .padding { text-align: center; }
+
+    </style>
+  </head>
+  <body>
+
+    <!-- 
+    <div class="filters">
+      <h3>Include</h3>
+      <div class="chips chips-autocomplete"></div>
+
+      <h3>Exclude</h3>
+      <div class="chips chips-autocomplete"></div>
+
+      <div class="switch inline-block">
+        Video<br>
+        <label>
+          <input type="checkbox" checked="checked">
+          <span class="lever"></span>
+        </label>
+      </div>
+      <div class="switch inline-block">
+        Audio<br>
+        <label>
+          <input type="checkbox" checked="checked">
+          <span class="lever"></span>
+        </label>
+      </div>
+      <div class="switch inline-block">
+        Pictures<br>
+        <label>
+          <input type="checkbox" checked="checked">
+          <span class="lever"></span>
+        </label>
+      </div>
+      -->
+
+
+    <div class="wrapper">
+
+      <div class="search-box">
+        <div class="card">
+          <div class="row">
+            
+            <div class="col s11">
+              <div class="chips chips-autocomplete"></div>
+            </div>
+
+            <div class="col s1">
+              <div class="btn-flat" id="filter-toggle">
+                <i class="material-icons">filter</i>
+              </div>
+            </div>
+          </div>
+
+          <div class="filters">
+
+            <h5>Verification Accuracy</h5>
+            <div class="padding">
+<!--               <div class="row">
+                <div class="col s1 center">x</div>
+                <div class="col s10"> -->
+                  <div id="verify-slider"></div>
+<!--                 </div>
+                <div class="col s1 center">v</div>
+              </div> -->
+            </div>
+
+            <h5>Media type</h5>
+            <div class="switch inline-block">
+              <i class="material-icons">videocam</i><br>
+              <label>
+                <input type="checkbox" checked="checked">
+                <span class="lever"></span>
+              </label>
+            </div>
+
+            <div class="switch inline-block">
+              <i class="material-icons">photo_camera</i><br>
+              <label>
+                <input type="checkbox" checked="checked">
+                <span class="lever"></span>
+              </label>
+            </div>
+
+            <div class="switch inline-block">
+              <i class="material-icons">mic</i><br>
+              <label>
+                <input type="checkbox" checked="checked">
+                <span class="lever"></span>
+              </label>
+            </div>
+
+          </div>
+        </div>
+      
+        <div style="text-align: right">
+          <button class="btn waves-effect waves-light" id="search-send">
+            Search
+            <i class="material-icons right">search</i>
+          </button>
+        </div>
+      </div>
+
+      <div style="width:100%"></div>
+      
+      <div class="content">
+
+        <div class="tweet-list hidden">
+
+          <div class="list-elem">
+            <div class="tweet">
+              <blockquote class="twitter-tweet" data-lang="es"><p lang="en" dir="ltr">Tragic update to <a href="https://twitter.com/hashtag/BreakingNews?src=hash&amp;ref_src=twsrc%5Etfw">#BreakingNews</a> out of <a href="https://twitter.com/hashtag/Harrisburg?src=hash&amp;ref_src=twsrc%5Etfw">#Harrisburg</a> <a href="https://twitter.com/hashtag/Pennsylvania?src=hash&amp;ref_src=twsrc%5Etfw">#Pennsylvania</a> - <a href="https://twitter.com/NBCPhiladelphia?ref_src=twsrc%5Etfw">@NBCPhiladelphia</a> reports a <a href="https://twitter.com/USMarshalsGov?ref_src=twsrc%5Etfw">@USMarshalsGov</a> has been killed; 2 other local <a href="https://twitter.com/hashtag/PoliceOfficers?src=hash&amp;ref_src=twsrc%5Etfw">#PoliceOfficers</a> wounded in a shooting. <a href="https://t.co/oLlwUs1NSe">https://t.co/oLlwUs1NSe</a></p>&mdash; Karl Parker (@KarlKParker) <a href="https://twitter.com/KarlKParker/status/954016566739456000?ref_src=twsrc%5Etfw">18 de enero de 2018</a></blockquote>
+            </div>
+
+            <div class="scoring">
+              ...
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="tweet">
+              <blockquote class="twitter-tweet" data-lang="es"><p lang="en" dir="ltr">Tragic update to <a href="https://twitter.com/hashtag/BreakingNews?src=hash&amp;ref_src=twsrc%5Etfw">#BreakingNews</a> out of <a href="https://twitter.com/hashtag/Harrisburg?src=hash&amp;ref_src=twsrc%5Etfw">#Harrisburg</a> <a href="https://twitter.com/hashtag/Pennsylvania?src=hash&amp;ref_src=twsrc%5Etfw">#Pennsylvania</a> - <a href="https://twitter.com/NBCPhiladelphia?ref_src=twsrc%5Etfw">@NBCPhiladelphia</a> reports a <a href="https://twitter.com/USMarshalsGov?ref_src=twsrc%5Etfw">@USMarshalsGov</a> has been killed; 2 other local <a href="https://twitter.com/hashtag/PoliceOfficers?src=hash&amp;ref_src=twsrc%5Etfw">#PoliceOfficers</a> wounded in a shooting. <a href="https://t.co/oLlwUs1NSe">https://t.co/oLlwUs1NSe</a></p>&mdash; Karl Parker (@KarlKParker) <a href="https://twitter.com/KarlKParker/status/954016566739456000?ref_src=twsrc%5Etfw">18 de enero de 2018</a></blockquote>
+            </div>
+
+            <div class="scoring false">
+              <span>FALSE</span>
+              <span>83%</span>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="tweet">
+              <blockquote class="twitter-tweet" data-lang="es"><p lang="en" dir="ltr">Tragic update to <a href="https://twitter.com/hashtag/BreakingNews?src=hash&amp;ref_src=twsrc%5Etfw">#BreakingNews</a> out of <a href="https://twitter.com/hashtag/Harrisburg?src=hash&amp;ref_src=twsrc%5Etfw">#Harrisburg</a> <a href="https://twitter.com/hashtag/Pennsylvania?src=hash&amp;ref_src=twsrc%5Etfw">#Pennsylvania</a> - <a href="https://twitter.com/NBCPhiladelphia?ref_src=twsrc%5Etfw">@NBCPhiladelphia</a> reports a <a href="https://twitter.com/USMarshalsGov?ref_src=twsrc%5Etfw">@USMarshalsGov</a> has been killed; 2 other local <a href="https://twitter.com/hashtag/PoliceOfficers?src=hash&amp;ref_src=twsrc%5Etfw">#PoliceOfficers</a> wounded in a shooting. <a href="https://t.co/oLlwUs1NSe">https://t.co/oLlwUs1NSe</a></p>&mdash; Karl Parker (@KarlKParker) <a href="https://twitter.com/KarlKParker/status/954016566739456000?ref_src=twsrc%5Etfw">18 de enero de 2018</a></blockquote>
+            </div>
+
+            <div class="scoring verified">
+              <span>TRUSTABLE</span>
+              <span>91%</span>
+            </div>
+          </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+      <script type="text/javascript">
+
+      $(document).ready(function() {
+
+        // Configure things...
+        $('.chips-autocomplete').material_chip({
+          autocompleteOptions: {
+            data: {
+              'Terreno': null,
+              'Terremoto': null,
+              'San Francisco': null,
+              'Santa Bárbara': null,
+              'Santa Mónica': null,
+              'Apple': null,
+              'Microsoft': null,
+              'Google': null
+            },
+            limit: Infinity,
+            minLength: 1
+          }
+        });
+
+        var slider = document.getElementById('verify-slider');
+        noUiSlider.create(slider, {
+         start: [50, 100],
+         connect: true,
+         step: 1,
+         orientation: 'horizontal', // 'horizontal' or 'vertical'
+         range: {
+           'min': 0,
+           'max': 100
+         },
+         format: wNumb({
+           decimals: 0
+         })
+        });
+
+        // Actions
+        $('#filter-toggle').on('click', function() {
+          console.log('Filters!');
+          $('.filters').toggle();
+        });
+
+        $('#search-send').on('click', search);
+
+        function search() {
+          $('.tweet-list').show();
+        }
+
+      });
+      </script>
+
+  </body>
+</html>
