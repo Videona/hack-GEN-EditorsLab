@@ -7,14 +7,12 @@ $(document).ready(function() {
     secondaryPlaceholder: '#hashag',
     autocompleteOptions: {
       data: {
-        '#Terreno': null,
-        '#Terremoto': null,
-        '#San Francisco': null,
-        '#Santa Bárbara': null,
-        '#Santa Mónica': null,
-        '#Apple': null,
-        '#Microsoft': null,
-        '#Google': null
+        '#breakingNews': null,
+        '#macron': null,
+        '#francia': null,
+        '#PabloCrespo': null,
+        '#hyperloop': null,
+        '#mili': null
       },
       limit: Infinity,
       minLength: 1
