@@ -1,0 +1,13 @@
+Project Description
+
+Problem/what we solve. Credibility is a crucial issue to every newsroom. Without it the reader will never believe what the journalist is narrating. Besides news agencies, one of the main sources of actual newsrooms is the Social Network, Twitter mainly, but you can't always trust what you read there. So journalists need a tool that helps identify and dismiss fake news as fast as possible and bring to the table only trustful news from verified sources. 
+
+Our aim is creating that tool, a news search engine, that combats fake news in the fastest way by evaluating the credibility of the source that is producing the news.
+
+How will we do it? We will build a search engine which will classify the news sources based in credibility criteria like origin (agency, newspaper, investigator/expert, citizen/witness) You will be able to look for a topic and then choose how much credibility you want on your results. From 0 to 100, showed in a timeline, all the results will appear indicating the sources that match that credibility. 
+
+Our target audience is all journalists from freelance to media newsrooms no matter if its digital, paper, radio or a TV station.
+
+Goals. Combat fake news and help accelerate the process of verification of trustful information in the newsrooms. Avoid as much noise as possible in the process.
+
+Monetization.
