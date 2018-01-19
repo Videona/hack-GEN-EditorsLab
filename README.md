@@ -13,3 +13,5 @@ We have been developing the camera options to offer professional quality results
 For this conquest we are developing our last project wich is creating a platform were journalist will be able to upload their content, as a categorized search engine. So that the journalist can put context into their stories, not only as a xxx space. 
 
 Once we have had the app ready for Android, which was one of our first things to do, we are nearly ready to perform on iOS, which is still in BETA trials. 
+
+Link to the product https://videona.github.io/hack-GEN-EditorsLab/index.html
