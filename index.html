@@ -81,13 +81,13 @@
               </label>
             </div>
 
-            <div class="switch inline-block">
+<!--             <div class="switch inline-block">
               <i class="material-icons">mic</i><br>
               <label>
                 <input type="checkbox" checked="checked">
                 <span class="lever"></span>
               </label>
-            </div>
+            </div> -->
 
           </div>
         </div>
@@ -104,13 +104,27 @@
       
       <div class="content">
 
-        <div class="tweet-list hidden">
+        <div class="tweet-list">
         </div>
       </div>
     </div>
 
 
-      <script type="text/javascript" src="js/script.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyCYHeT75YXQW774FmZQaGrJxH0HoRNp2BI",
+        authDomain: "gen-editors-lab.firebaseapp.com",
+        databaseURL: "https://gen-editors-lab.firebaseio.com",
+        projectId: "gen-editors-lab",
+        storageBucket: "",
+        messagingSenderId: "723054850412"
+      };
+      firebase.initializeApp(config);
+    </script>
+
+    <script type="text/javascript" src="js/script.js"></script>
 
   </body>
 </html>

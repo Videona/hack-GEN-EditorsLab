@@ -36,6 +36,11 @@ $(document).ready(function() {
     })
   });
 
+  slider.noUiSlider.on('end', function () {
+    var values = slider.noUiSlider.get();
+    filterByTrust(Number(values[0]), Number(values[1]));
+  });
+
   // Actions
   $('#filter-toggle').on('click', function() {
     console.log('Filters!');
@@ -44,6 +49,8 @@ $(document).ready(function() {
 
   $('#search-send').on('click', search);
 
+
+  // Functions
   function search() {
 
     var tuits = [
@@ -66,16 +73,22 @@ $(document).ready(function() {
     ];
 
     for (var i = 0; i < tuits.length; i++) {
-      var tuit = '<div class="row"><div class="tweet">';
+      var tuit = makeTuit(tuits[i]);
+      writeTuit(tuit);
+    }
+  }
+
+  function makeTuit(data) {
+    var tuit = '<div class="row tweet-elem"><div class="tweet">';
       tuit += '<blockquote class="twitter-tweet" data-lang="en">';
-      tuit += '!<a href="' + tuits[i].url + '"></a>';
+      tuit += '<a href="' + data.url + '"></a>';
       tuit +='</blockquote>';
       tuit += '</div>';
 
       var valid;
       var icon;
 
-      if (tuits[i].rating > 0) {
+      if (data.rating > 0) {
         valid = 'verified';
         icon = '<i class="material-icons">check_circle</i>';
       } else {
@@ -84,23 +97,75 @@ $(document).ready(function() {
       }
 
       tuit += '<div class="scoring ' + valid + '">';
-      tuit += '<span>' + icon + '</span><br/><span>' + percent(tuits[i].rating) + '%</span>';
+      tuit += '<span>' + icon + '</span><br/><span class="trust">' + percent(data.rating) + '</span>%';
       tuit += '</div></div>';
 
-      $('.tweet-list').append(tuit);
-    }
+      return tuit;
+  }
 
-    $('.tweet-list').show();
-
-    twttr.widgets.load();
+  function writeTuit(tuit) {
+    console.log('Yeeeeepa!')
+    prependTuit(tuit)
+  }
+  function appendTuit(tuit) {
+    $('.tweet-list').append(tuit);
+    twttr.widgets.load(); // ToDo: Would be great pass as param the .tweet-list dom elem.
+  }
+  function prependTuit(tuit) {
+    $('.tweet-list').prepend(tuit);
+    twttr.widgets.load(); // ToDo: Would be great pass as param the .tweet-list dom elem.
   }
 
   function percent(num) {
-    if(num > 0) {
-      return num*100;
-    } else {
-      return -num*100;
+    return ((Number(num) + 1) * 50).toFixed();
+  }
+
+
+  var written = [];
+
+  function isWritten(data) {
+    for (var i = written.length - 1; i >= 0; i--) {
+      if(written[i].url.toUpperCase() === data.url.toUpperCase()) {
+        return true;
+      }
     }
+
+    return false;
+  }
+
+
+  // Realtime DB
+  var database = firebase.database();
+
+  var hashtag = 'breakingNews';
+
+  var tuitRef = firebase.database().ref(hashtag);
+  tuitRef.on('value', function(snapshot) {
+    var data = snapshot.val();
+    var keys = Object.keys(data);
+
+    for (var i = 0; i < keys.length; i++) {
+      if (!isWritten(data[keys[i]])) {
+        var tuit = makeTuit(data[keys[i]]);
+        prependTuit(tuit);        
+        written.push(data[keys[i]]);
+      }
+    }
+  });
+
+
+  // Filters!
+
+  function filterByTrust(min, max) {
+    $('.tweet-elem').each(function () {
+      var trust = Number($(this).find('.trust').html());
+
+      if(trust < min || trust > max ) {
+        $(this).hide();
+      } else {
+        $(this).show();
+      }
+    });
   }
 
 });
