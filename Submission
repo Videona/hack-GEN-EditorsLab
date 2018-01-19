@@ -1,4 +1,4 @@
-Project Description
+A. Project Description (Max. 3000 characters) Now: 1200
 
 Problem/what we solve. Credibility is a crucial issue to every newsroom. Without it the reader will never believe what the journalist is narrating. Besides news agencies, one of the main sources of actual newsrooms is the Social Network, Twitter mainly, but you can't always trust what you read there. So journalists need a tool that helps identify and dismiss fake news as fast as possible and bring to the table only trustful news from verified sources. 
 
@@ -8,6 +8,12 @@ How will we do it? We will build a search engine which will classify the news so
 
 Our target audience is all journalists from freelance to media newsrooms no matter if its digital, paper, radio or a TV station.
 
-Goals. Combat fake news and help accelerate the process of verification of trustful information in the newsrooms. Avoid as much noise as possible in the process.
+Goals. Combat fake news and help accelerate the process of verification of trustful sources of information in the newsrooms. Avoid as much noise as possible in the process.
 
 Monetization.
+
+We are charging for this service 10€ per hour of video analysed. 
+
+B. Technologies used. (Máx. 2000 characters) Now:288
+The programming languages used are NODEJS and Javascript. The technology used is Firebase, combined with Machine Learning and Data Analysis, for the search engine. And a twitter API with reads teh information in real time. This will enable us to obtain a "white list" of trustful sources.
+
