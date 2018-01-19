@@ -1,11 +1,13 @@
    .inline-block { display: inline-block; }
 
    #topbar {
-    background-color: #0084B4;
+    /*background-color: #0084B4;*/
+    background-color: #F14B51;
     padding: 16px;
    }
 
    #topbar h1 {
+    text-align: center;
     color: #fff;
     font-size: 27px;
     font-weight: bold;
@@ -112,4 +114,19 @@
   
   .scoring { font-size: 16px; }
   .scoring i.material-icons { font-size: 24px; }
+}
+
+
+.btn, 
+.btn-large,
+.switch label input[type=checkbox]:checked+.lever:after,
+.noUi-target.noUi-horizontal .noUi-tooltip,
+.noUi-connect,
+.noUi-horizontal .noUi-handle, 
+.noUi-vertical .noUi-handle {
+  background-color: #F14B51;
+}
+
+.switch label input[type=checkbox]:checked+.lever {
+  background-color: rgba(241, 75, 81, 0.25);
 }
