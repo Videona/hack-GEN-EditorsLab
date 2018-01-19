@@ -1,5 +1,5 @@
 # **Main persona:**
-“Gobo, Braking News Editor”
+“Gobo, Breaking News Editor”
 
 ## **BASIC INFO**
 Name: 	Gobo Fernandez
