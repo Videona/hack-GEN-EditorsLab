@@ -1,6 +1,6 @@
 // index.js
 
-var Stream = require('./stream');
+var Stream = require('./lib/stream');
 
 var Process = require('./lib/process');
 
@@ -15,7 +15,7 @@ Stream.start(topic, processTweet);
 Store.onTagChange(function (newTag) {
 	console.log('Listening tag changed to: ' + newTag);
 	Stream.stop();
-	Stream.start('#' + newTag, processTweet); 
+	Stream.start('#' + newTag, processTweet, retry); 
 });
 
 function processTweet(tweet) {
@@ -33,4 +33,9 @@ function processTweet(tweet) {
 	console.log('Processed!!');
 
 	Stream.stop();
+}
+
+function retry() {
+	Stream.stop();
+	Stream.start(topic, processTweet); 
 }
