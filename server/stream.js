@@ -1,10 +1,6 @@
 var TwitterPackage = require('twitter');
 var config = require('./config');
 
-var Process = require('./lib/process');
-
-var Store = require('./lib/store');
-
 var secret = {
 	consumer_key: config.twitter.consumer_key,
 	consumer_secret: config.twitter.consumer_secret,
@@ -14,30 +10,28 @@ var secret = {
 
 var Twitter = new TwitterPackage(secret);
 
-// ToDo: Update the listening hashtag according to firebase
+function stream(topic, onData) {
 
-Twitter.stream('statuses/filter', {track: config.topics.toString()}, function(stream) {
-	stream.on('data', processTweet);
-	stream.on('error', function(error) {
-		console.log(error);
+	console.log('Listening to: ', topic);
+	Twitter.stream('statuses/filter', {track: topic}, function(stream) {			
+		Twitter.currentTwitStream = stream;
+
+		stream.on('data', onData);
+		stream.on('error', function(error) {
+			console.error('Stream error:');
+			console.error(error);
+		});
 	});
-});
 
-function processTweet(tweet) {
-	const data = Process.process(tweet);
+	console.log('yooooooooooooooooooloooooooooooooooooo');
+}
 
-	console.log(data);
-
-	const hash = 'breakingNews';
-
-	Store.save(hash, data, function(success, id) {
-		if(success) {
-			console.log('Stored tweet with id ' + id);
-		} else {
-			console.error('Error storing tweet with id ' + id);
-		}
-	});
-	console.log('Processed!!');
+function destroyStream() {
+	Twitter.currentTwitStream.destroy();
 }
 
 
+module.exports = {
+	start: stream,
+	stop: destroyStream
+};

@@ -57,32 +57,17 @@ $(document).ready(function() {
 
     written = [];
     clearTuits();
-    hashtag = 'yeeepa';
+    hashtag = 'ishalltestthis';
+
+    var tags = $('.chips-autocomplete').material_chip('data');
+
+    if(tags.length > 0) {
+      hashtag = tags[0].tag.replace('#', '');
+    }
+    
+    console.log(hashtag);
+
     updateSearch();
-
-    // var tuits = [
-    //   {
-    //     url: 'https://twitter.com/DJROMANROXFORD/status/954015867754381312',
-    //     rating: 0.97
-    //   },
-    //   {
-    //     url: 'https://twitter.com/KarlKParker/status/954016566739456000?ref_src=twsrc%5Etfw',
-    //     rating: 0.71
-    //   },
-    //   {
-    //     url: 'https://twitter.com/DJROMANROXFORD/status/954015867754381312',
-    //     rating: -0.2
-    //   },
-    //   {
-    //     url: 'https://twitter.com/KarlKParker/status/954016566739456000?ref_src=twsrc%5Etfw',
-    //     rating: 0.68
-    //   }
-    // ];
-
-    // for (var i = 0; i < tuits.length; i++) {
-    //   var tuit = makeTuit(tuits[i]);
-    //   writeTuit(tuit);
-    // }
   }
 
   function makeTuit(data) {

@@ -12,17 +12,21 @@ Firebase.initializeApp({
 
 const db = Firebase.database();
 
-var activeTag = 'breakingNews';
+const listener = {}
 
+var activeTag = 'breakingNews';
 
 // Listen active tag
 db.ref('search').on('value', function(snapshot) {
 	activeTag = snapshot.val();
-	console.log('Listening tag changed to: ' + activeTag);
+
+	if (typeof listener.tagChange === 'function') {
+		listener.tagChange(activeTag);
+	}
 });
 
 
-function save(hashtag, data, cb) {
+function save(data, cb) {
 	
 	const ref = db.ref(activeTag);
 
@@ -34,5 +38,11 @@ function save(hashtag, data, cb) {
 
 
 module.exports = {
-	save: save
+	save: save,
+	activeTag: function () { 
+		return '#' + activeTag; 
+	},
+	onTagChange: function (cb) {
+		listener.tagChange = cb;
+	}
 };
