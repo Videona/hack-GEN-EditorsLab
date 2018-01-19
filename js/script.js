@@ -53,29 +53,36 @@ $(document).ready(function() {
   // Functions
   function search() {
 
-    var tuits = [
-      {
-        url: 'https://twitter.com/DJROMANROXFORD/status/954015867754381312',
-        rating: 0.97
-      },
-      {
-        url: 'https://twitter.com/KarlKParker/status/954016566739456000?ref_src=twsrc%5Etfw',
-        rating: 0.71
-      },
-      {
-        url: 'https://twitter.com/DJROMANROXFORD/status/954015867754381312',
-        rating: -0.2
-      },
-      {
-        url: 'https://twitter.com/KarlKParker/status/954016566739456000?ref_src=twsrc%5Etfw',
-        rating: 0.68
-      }
-    ];
+    // Update search!
 
-    for (var i = 0; i < tuits.length; i++) {
-      var tuit = makeTuit(tuits[i]);
-      writeTuit(tuit);
-    }
+    written = [];
+    clearTuits();
+    hashtag = 'yeeepa';
+    updateSearch();
+
+    // var tuits = [
+    //   {
+    //     url: 'https://twitter.com/DJROMANROXFORD/status/954015867754381312',
+    //     rating: 0.97
+    //   },
+    //   {
+    //     url: 'https://twitter.com/KarlKParker/status/954016566739456000?ref_src=twsrc%5Etfw',
+    //     rating: 0.71
+    //   },
+    //   {
+    //     url: 'https://twitter.com/DJROMANROXFORD/status/954015867754381312',
+    //     rating: -0.2
+    //   },
+    //   {
+    //     url: 'https://twitter.com/KarlKParker/status/954016566739456000?ref_src=twsrc%5Etfw',
+    //     rating: 0.68
+    //   }
+    // ];
+
+    // for (var i = 0; i < tuits.length; i++) {
+    //   var tuit = makeTuit(tuits[i]);
+    //   writeTuit(tuit);
+    // }
   }
 
   function makeTuit(data) {
@@ -116,6 +123,10 @@ $(document).ready(function() {
     twttr.widgets.load(); // ToDo: Would be great pass as param the .tweet-list dom elem.
   }
 
+  function clearTuits() {
+    $('.tweet-list').html('');
+  }
+
   function percent(num) {
     return ((Number(num) + 1) * 50).toFixed();
   }
@@ -138,11 +149,27 @@ $(document).ready(function() {
   var database = firebase.database();
 
   var hashtag = 'breakingNews';
+  var ref = firebase.database().ref(hashtag);
+  var off = false;
 
-  var tuitRef = firebase.database().ref(hashtag);
-  tuitRef.on('value', function(snapshot) {
+  function updateSearch() {
+    if(off) {
+      // ref.off('value', recieveData);
+      ref.off(); //'value', recieveData);
+    }
+    ref = firebase.database().ref(hashtag);
+    ref.on('value', recieveData);
+    off = true;
+
+    firebase.database().ref('search').set(hashtag);
+  }
+  updateSearch(); // Execute first update, to start loading things
+
+
+  function recieveData(snapshot) {
     var data = snapshot.val();
-    var keys = Object.keys(data);
+    var keys = (data && Object.keys(data)) || [];
+
 
     for (var i = 0; i < keys.length; i++) {
       if (!isWritten(data[keys[i]])) {
@@ -151,7 +178,7 @@ $(document).ready(function() {
         written.push(data[keys[i]]);
       }
     }
-  });
+  }
 
 
   // Filters!
