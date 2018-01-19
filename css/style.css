@@ -55,6 +55,7 @@
     .scoring { 
       display: table-cell; 
       vertical-align: middle; 
+      border-radius: 4px;
     }
 
     .tweet iframe {
