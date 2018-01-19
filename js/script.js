@@ -4,17 +4,16 @@ $(document).ready(function() {
   // Configure things...
   $('.chips-autocomplete').material_chip({
     placeholder: 'Find by #hashtag',
-    secondaryPlaceholder: '#hashag',
+    secondaryPlaceholder: '#hashtag',
     autocompleteOptions: {
       data: {
-        '#Terreno': null,
-        '#Terremoto': null,
-        '#San Francisco': null,
-        '#Santa Bárbara': null,
-        '#Santa Mónica': null,
-        '#Apple': null,
-        '#Microsoft': null,
-        '#Google': null
+        '#breakingNews': null,
+        '#gurtel': null,
+        '#macron': null,
+        '#francia': null,
+        '#PabloCrespo': null,
+        '#hyperloop': null,
+        '#mili': null
       },
       limit: Infinity,
       minLength: 1
@@ -57,7 +56,7 @@ $(document).ready(function() {
 
     written = [];
     clearTuits();
-    hashtag = 'ishalltestthis';
+    hashtag = 'breakingNews';
 
     var tags = $('.chips-autocomplete').material_chip('data');
 
@@ -134,19 +133,22 @@ $(document).ready(function() {
   var database = firebase.database();
 
   var hashtag = 'breakingNews';
-  var ref = firebase.database().ref(hashtag);
+  var ref = firebase.database().ref('topics/' + hashtag);
   var off = false;
 
   function updateSearch() {
     if(off) {
-      // ref.off('value', recieveData);
-      ref.off(); //'value', recieveData);
+      ref.off();
     }
-    ref = firebase.database().ref(hashtag);
+
+    hashtag.replace('#', '');
+    
+    firebase.database().ref('search').set(hashtag);
+
+    ref = firebase.database().ref('topics/' + hashtag);
     ref.on('value', recieveData);
     off = true;
 
-    firebase.database().ref('search').set(hashtag);
   }
   updateSearch(); // Execute first update, to start loading things
 

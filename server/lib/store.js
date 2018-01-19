@@ -26,9 +26,11 @@ db.ref('search').on('value', function(snapshot) {
 });
 
 
-function save(data, cb) {
+function save(hashtag, data, cb) {
+
+	var tag = hashtag.replace('#', '') || activeTag;
 	
-	const ref = db.ref(activeTag);
+	const ref = db.ref('topics/' + tag);
 
 	const newData = ref.push();
 	newData.set(data);
