@@ -23,7 +23,7 @@ $(document).ready(function() {
 
   var slider = document.getElementById('verify-slider');
   noUiSlider.create(slider, {
-    start: [50, 100],
+    start: [0, 100],
     connect: true,
     step: 1,
     orientation: 'horizontal', // 'horizontal' or 'vertical'
