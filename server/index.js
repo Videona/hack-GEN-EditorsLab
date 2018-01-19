@@ -1,36 +1,22 @@
 // index.js
 
 var Stream = require('./lib/stream');
-var Search = require('./lib/search');
+
 var Process = require('./lib/process');
+
 var Store = require('./lib/store');
 
 
-var topics = [];
 var topic = Store.activeTag();
+// ishalltestthis
 
+Stream.start(topic, processTweet); 
 
-tagChange(topic);
-
-Store.onTagChange(tagChange);
-
-function tagChange(newTag) {
+Store.onTagChange(function (newTag) {
 	console.log('Listening tag changed to: ' + newTag);
 	Stream.stop();
-
-	if(topics.indexOf(newTag) === -1) {
-		topics.push(newTag);
-		
-		Search.search(newTag, function(tuits) {
-			for (var i = tuits.length - 1; i >= 0; i--) {
-				processTweet(tuits[i]);
-			}
-		});
-	}
-
-	Stream.start(topics.toString(), processTweet, retry); 
-
-}
+	Stream.start('#' + newTag, processTweet, retry); 
+});
 
 function processTweet(tweet) {
 	const data = Process.process(tweet);

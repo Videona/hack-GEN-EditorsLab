@@ -18,7 +18,7 @@ function stream(topic, onData, onError) {
 }
 
 function destroyStream() {
-	return (Twitter.currentTwitStream && Twitter.currentTwitStream.destroy());
+	Twitter.currentTwitStream.destroy();
 }
 
 
