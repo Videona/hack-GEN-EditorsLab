@@ -1,0 +1,116 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Twitter noise reductor</title>
+
+    <link rel="shortcut icon" href="images/favicon.png">
+  
+    <!-- Twitter -->
+    <script src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- wNumb -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/wnumb/1.1.0/wNumb.min.js"></script>
+
+    <!-- noUiSlider CSS -->
+    <link rel="stylesheet" href="http://materializecss.com/extras/noUiSlider/nouislider.css">
+
+    <!-- noUiSlider -->
+    <script src="http://materializecss.com/extras/noUiSlider/nouislider.js"></script>
+
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+    <!-- Materialize JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+
+  </head>
+  <body>
+
+    <div id="topbar">
+      <h1>Twitter noise reductor</h1>
+    </div>
+
+    <div class="wrapper">
+
+      <div class="search-box">
+        <div class="card">
+          <div class="row">
+            
+            <div class="col s11">
+              <div class="chips chips-autocomplete"></div>
+            </div>
+
+            <div class="col s1">
+              <div class="btn-flat" id="filter-toggle">
+                <i class="material-icons">filter_list</i>
+              </div>
+            </div>
+          </div>
+
+          <div class="filters hidden">
+
+            <h5>Verification Accuracy</h5>
+            <div class="padding">
+                  <div id="verify-slider"></div>
+            </div>
+
+            <h5>Media type</h5>
+            <div class="switch inline-block">
+              <i class="material-icons">videocam</i><br>
+              <label>
+                <input type="checkbox" checked="checked">
+                <span class="lever"></span>
+              </label>
+            </div>
+
+            <div class="switch inline-block">
+              <i class="material-icons">photo_camera</i><br>
+              <label>
+                <input type="checkbox" checked="checked">
+                <span class="lever"></span>
+              </label>
+            </div>
+
+            <div class="switch inline-block">
+              <i class="material-icons">mic</i><br>
+              <label>
+                <input type="checkbox" checked="checked">
+                <span class="lever"></span>
+              </label>
+            </div>
+
+          </div>
+        </div>
+      
+        <div style="text-align: right">
+          <button class="btn waves-effect waves-light" id="search-send">
+            Search
+            <i class="material-icons right">search</i>
+          </button>
+        </div>
+      </div>
+
+      <div style="width:100%"></div>
+      
+      <div class="content">
+
+        <div class="tweet-list hidden">
+        </div>
+      </div>
+    </div>
+
+
+      <script type="text/javascript" src="js/script.js"></script>
+
+  </body>
+</html>
