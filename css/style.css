@@ -61,7 +61,7 @@
     
     .scoring {
       background-color: lightgrey;
-      height: 498px;
+      /*height: 498px;*/
       text-align: center;
       width: 100px;
       font-size: 32px;
@@ -103,3 +103,13 @@
     .hidden { display: none; }
     .padding { padding: 16px; }
     .padding { text-align: center; }
+
+
+@media (max-width: 660px) {
+  #filter-toggle {
+      margin-left: -14px;
+  }
+  
+  .scoring { font-size: 16px; }
+  .scoring i.material-icons { font-size: 24px; }
+}
