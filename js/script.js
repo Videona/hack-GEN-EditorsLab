@@ -57,7 +57,7 @@ $(document).ready(function() {
 
     written = [];
     clearTuits();
-    hashtag = 'ishalltestthis';
+    hashtag = '#breakingNews';
 
     var tags = $('.chips-autocomplete').material_chip('data');
 
